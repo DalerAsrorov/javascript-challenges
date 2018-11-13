@@ -16,7 +16,7 @@ let mySetInterval = function(fn, time) {
     }, time)
   );
 
-  return this.id;
+  return mySetInterval.id;
 };
 
 function clearInterval(id) {
