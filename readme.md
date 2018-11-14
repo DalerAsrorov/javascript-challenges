@@ -33,24 +33,24 @@ experience of the challenge for other developers who find this repository.
 
 ### Beginner
 
-* [Babylonian square root method](/babylonian-method/)
-* [Number frequency](/number-frequency/)
+- [x] [Babylonian square root method](/babylonian-method/)
+- [x] [Number frequency](/number-frequency/)
 
 ### Intermediate
 
-* [Stack machine calculator](/stack-machine-calculator/)
-* [Target sum exists](/target-sum-exists/)
-* [Balanced Parentheses](/balanced-parens/)
-* [Add eventing](/add-eventing/)
+- [Stack machine calculator](/stack-machine-calculator/)
+- [Target sum exists](/target-sum-exists/)
+- [Balanced Parentheses](/balanced-parens/)
+- [Add eventing](/add-eventing/)
 
 ### Advanced
 
-* [Object diffing](/object-diff/)
-* [Recreate setInterval](/setinterval/)
-* [Recreate Promise.all](/promise-dot-all/)
+- [Object diffing](/object-diff/)
+- [Recreate setInterval](/setinterval/)
+- [Recreate Promise.all](/promise-dot-all/)
 
 ## Relevant Reading
 
-* [10 Interview Questions Every JavaScript Developer Should Know][js interview questions article]
+- [10 Interview Questions Every JavaScript Developer Should Know][js interview questions article]
 
 [js interview questions article]: https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95
