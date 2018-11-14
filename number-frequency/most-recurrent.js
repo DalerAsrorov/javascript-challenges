@@ -24,6 +24,7 @@ const mostRecurrent = set => {
       }
       return 0;
     }
+    return 0;
   });
 
   return sorted[0][2];
