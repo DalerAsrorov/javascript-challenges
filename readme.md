@@ -40,14 +40,14 @@ experience of the challenge for other developers who find this repository.
 
 - [Stack machine calculator](/stack-machine-calculator/)
 - [Target sum exists](/target-sum-exists/)
-- [Balanced Parentheses](/balanced-parens/)
-- [Add eventing](/add-eventing/)
+- [x] [Balanced Parentheses](/balanced-parens/)
+- [x] [Add eventing](/add-eventing/)
 
 ### Advanced
 
 - [Object diffing](/object-diff/)
-- [Recreate setInterval](/setinterval/)
-- [Recreate Promise.all](/promise-dot-all/)
+- [x] [Recreate setInterval](/setinterval/)
+- [x] [Recreate Promise.all](/promise-dot-all/)
 
 ## Relevant Reading
 
