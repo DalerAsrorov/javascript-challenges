@@ -1,3 +1,4 @@
+// solution 1
 const mostRecurrent = set => {
   let cache = {};
 
@@ -8,6 +9,7 @@ const mostRecurrent = set => {
       cache[num] = [1, i, num]; // (count, firstIndex, num)
     } else {
       cache[num][0] += 1;
+      ``;
     }
   }
 
@@ -16,13 +18,12 @@ const mostRecurrent = set => {
       return 1;
     } else if (a[0] > b[0]) {
       return -1;
-    } else if (a[0] === b[0]) {
+    } else {
       if (a[1] < b[1]) {
         return -1;
       }
-      return 1;
+      return 0;
     }
-    return 0;
   });
 
   return sorted[0][2];
