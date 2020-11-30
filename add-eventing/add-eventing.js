@@ -1,22 +1,22 @@
-const addEventing = function(obj) {
-  let eventCache = {};
+const addEventing = function addEventing(obj) {
+    let cache = new Map();
 
-  obj.on = (eventName, callback) => {
-    if (eventCache[eventName]) {
-      eventCache[eventName] = [...eventCache[eventName], callback.bind(obj)];
-    } else {
-      eventCache[eventName] = [callback.bind(obj)];
-    }
-  };
-  obj.trigger = (eventName, ...args) => {
-    if (eventCache[eventName]) {
-      eventCache[eventName].forEach(callbackFn => {
-        callbackFn(...args);
-      });
-    }
-  };
+    obj.on = (eventName, actionFn) => {
+        if (cache.has(eventName)) {
+            cache.set(eventName, [...cache.get(eventName), actionFn]);
+        } else {
+            cache.set(eventName, [actionFn]);
+        }
+    };
+    obj.trigger = (eventName, ...restArgs) => {
+        if (cache.has(eventName)) {
+            cache.get(eventName).forEach((actionFn) => {
+                actionFn.call(this, ...restArgs);
+            });
+        }
+    };
 
-  return obj;
+    return obj;
 };
 
 module.exports = addEventing;

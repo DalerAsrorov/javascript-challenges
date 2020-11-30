@@ -33,7 +33,7 @@ test('it should be able to handle multiple callback functions for the same event
   assert.end();
 });
 
-test.skip('if it is called with an additional argument it should pass it to the listeners', assert => {
+test('if it is called with an additional argument it should pass it to the listeners', assert => {
   const obj = addEventing({ name: 'Kelsey', age: 30 });
   const ageChangeEvent = sinon.spy();
   const newAge = 31;
