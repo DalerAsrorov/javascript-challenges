@@ -1,26 +1,27 @@
 function all(promises) {
   return new Promise((res, rej) => {
-    const numberOfPromises = promises.length;
+    if (promises.length === 0) {
+      res([]);
+    }
+    const nPromises = promises.length;
     let priorityQueue = [];
 
-    if (numberOfPromises === 0) {
-      res(priorityQueue);
+    for (let i = 0; i < nPromises; i++) {
+      const p = promises[i];
+
+      Promise.resolve(p)
+        .then(pValue => {
+          priorityQueue.push([pValue, i]);
+
+          if (priorityQueue.length === nPromises) {
+            const sorted = priorityQueue.sort((a, b) => a[1] - b[1]);
+            res(sorted.map(el => el[0]));
+          }
+        })
+        .catch(error => {
+          rej(error);
+        });
     }
-
-    promises.forEach((p, i) => {
-      if (!(p instanceof Promise)) {
-        p = Promise.resolve(p);
-      }
-
-      p.then(d => {
-        priorityQueue.push([d, i]);
-
-        if (priorityQueue.length >= numberOfPromises) {
-          priorityQueue.sort((a, b) => a[1] - b[1]);
-          res(priorityQueue.map(a => a[0]));
-        }
-      }).catch(error => rej(error));
-    });
   });
 }
 

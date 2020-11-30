@@ -1,41 +1,26 @@
-const func = d => console.log('hi', d);
-
-let mySetInterval = function(fn, time) {
-  mySetInterval.intervals = mySetInterval.intervals
-    ? mySetInterval.intervals
-    : new Map();
-  mySetInterval.id = mySetInterval.id ? mySetInterval.id + 1 : 1;
-
-  let intervalsMap = mySetInterval.intervals;
-
-  intervalsMap.set(
-    this.id,
-    setTimeout(function next() {
-      intervalsMap.set(this.id, setTimeout(next, time));
-      fn.apply(this, arguments);
-    }, time)
-  );
-
-  return mySetInterval.id;
+const _setInterval = (callback, delay) => {
+  const timerRef = { id: null };
+  const timeout = () => {
+    timerRef.id = setTimeout(() => {
+      callback();
+      timeout();
+    }, delay);
+  };
+  timeout();
+  return timerRef;
 };
 
-function clearInterval(id) {
-  clearTimeout(mySetInterval.intervals.get(id));
-}
+const timerRef = _setInterval(() => {
+  console.log("Callback", 1);
+}, 1000);
+const timerRef2 = _setInterval(() => {
+  console.log("Callback", 2);
+}, 1000);
 
-this.interval1 = mySetInterval(() => {
-  clearInterval(this.interval1);
-  func('daler');
-}, 5000);
-this.interval2 = mySetInterval(() => {
-  clearInterval(this.interval2);
-  func('allan');
-}, 5000);
-this.interval3 = mySetInterval(() => {
-  //   clearInterval(this.interval3);
-  func('dj');
+setTimeout(() => {
+  clearTimeout(timerRef.id);
 }, 5000);
 
-// this.interval2 = mySetInterval(() => {
-//   func('daler');
-// }, 5000);
+setTimeout(() => {
+  clearTimeout(timerRef2.id);
+}, 7000);
