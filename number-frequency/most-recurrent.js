@@ -1,32 +1,28 @@
 // solution 1
 const mostRecurrent = set => {
-  let cache = {};
+  if (set.length === 0) {
+    return null;
+  }
 
-  for (let i = 0; i < set.length; i++) {
-    let num = set[i];
-
-    if (!cache[num]) {
-      cache[num] = [1, i, num]; // (count, firstIndex, num)
+  const freqMap = set.reduce((accum, curr) => {
+    if (accum.has(curr)) {
+      accum.set(curr, accum.get(curr) + 1);
     } else {
-      cache[num][0] += 1;
-      ``;
+      accum.set(curr, 1);
+    }
+    return accum;
+  }, new Map());
+
+  let maxFreq = -1;
+  let maxEl = set[0];
+  for (let [el, freq] of freqMap.entries()) {
+    if (freq > maxFreq) {
+      maxFreq = freq;
+      maxEl = el;
     }
   }
 
-  const sorted = Object.values(cache).sort((a, b) => {
-    if (a[0] < b[0]) {
-      return 1;
-    } else if (a[0] > b[0]) {
-      return -1;
-    } else {
-      if (a[1] < b[1]) {
-        return -1;
-      }
-      return 0;
-    }
-  });
-
-  return sorted[0][2];
+  return maxEl;
 };
 
 module.exports = mostRecurrent;
