@@ -1,29 +1,30 @@
-let PARENS_MAPPING = {
-  '[': ']',
-  '(': ')',
-  '{': '}'
+
+
+const OPPOSITE_CHAR_MAPPING = {
+  ')': '(',
+  ']': '[',
+  '}': '{'
 };
 
 const parensAreBalanced = input => {
   let stack = [];
 
   for (let i = 0; i < input.length; i++) {
-    let char = input[i];
+    let s = input[i];
 
-    if (char === '(' || char === '[' || char === '{') {
-      stack.push(char);
-    } else if (char === ')' || char === ']' || char === '}') {
-      let popped = stack[stack.length - 1] ? stack.pop() : '#';
+    if (s === '(' || s === '[' || s === '{') {
+      stack.push(s);
+    } else if (OPPOSITE_CHAR_MAPPING[s]) {
+      const lastBeginning = stack.pop();
+      const beginning = OPPOSITE_CHAR_MAPPING[s];
 
-      if (char !== PARENS_MAPPING[popped]) {
+      if (lastBeginning !== beginning) {
         return false;
       }
     }
   }
 
-  return stack.length === 0;
+  return !stack.length;
 };
-
-let result = parensAreBalanced('{}');
 
 module.exports = parensAreBalanced;
