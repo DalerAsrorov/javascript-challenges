@@ -1,27 +1,24 @@
 function all(promises) {
   return new Promise((res, rej) => {
-    if (promises.length === 0) {
-      res([]);
+    let dataPoints = [];
+
+    if (!promises.length) {
+      res(dataPoints);
     }
-    const nPromises = promises.length;
-    let priorityQueue = [];
 
-    for (let i = 0; i < nPromises; i++) {
-      const p = promises[i];
+    promises.forEach((p, i) => {
+      let resP = Promise.resolve(p);
 
-      Promise.resolve(p)
-        .then(pValue => {
-          priorityQueue.push([pValue, i]);
-
-          if (priorityQueue.length === nPromises) {
-            const sorted = priorityQueue.sort((a, b) => a[1] - b[1]);
-            res(sorted.map(el => el[0]));
-          }
-        })
-        .catch(error => {
-          rej(error);
-        });
-    }
+      resP.then((data) => {
+        dataPoints.splice(i, 0, data);
+        if (dataPoints.length >= promises.length) {
+          res(dataPoints);
+        }
+      }).catch((err) => {
+        dataPoints = [];
+        rej(err);
+      });
+    });
   });
 }
 
